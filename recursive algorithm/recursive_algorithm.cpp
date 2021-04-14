@@ -1,5 +1,10 @@
+// code edited by: Edward Cruz
+// Discreet Mathematics (MATH-2305-N01)
 #include<iostream>
 
+// main source for merge sort algorithm code:
+// https://www.geeksforgeeks.org/merge-sort/
+// date found: 4/13/2021
 void merge(int array[], int left, int mid, int right) {
     int n1 = mid - left + 1;
     int n2 = right - mid;
@@ -56,34 +61,38 @@ void merge(int array[], int left, int mid, int right) {
     }
 }
 
+// the merge sort that calls the actual merge recursively as shown in the psuedo code in the book (section 5.4.4)
 void mergeSort(int array[],int left,int right){
     if(left >= right) {
-        return;//returns recursively
+        return; // returns recursively
     }
     
     int mid = left + (right-left) / 2;
     
-    mergeSort(array, left ,mid);
-    mergeSort(array, mid+1, right);
-    merge(array, left, mid, right);
+    mergeSort(array, left ,mid);    // merges the left side
+    mergeSort(array, mid+1, right); // merges the right side
+    merge(array, left, mid, right); // puts it all together
 }
 
+// function to print array so i dont have to make a for loop every time.
 void printarray(int array[], int size)
 {
     for (int i = 0; i < size; i++)
         std::cout << array[i] << " ";
 }
 
+// test/demo for mergeSort()
 int main () {
-    int a[10] = {5, 50, 92, 33, 24, 86, 14, 53, 76, 46};
-    int aSize = sizeof(a) / sizeof(a[0]);
+    int a[10] = {5, 50, 92, 33, 24, 86, 14, 53, 76, 46}; // test list
+    int aSize = sizeof(a) / sizeof(a[0]);                // size of test list
 
-    std::cout << "The array unsorted is: " << std::endl;
-    printarray(a, aSize);
+    std::cout << "\nThe array unsorted is: " << std::endl;
+    printarray(a, aSize);   // prints the array to console
 
     std::cout << "\n\nThe array after being sorted is: " << std::endl;
-    mergeSort(a, 0, aSize-1);
-    printarray(a, aSize);
-
+    mergeSort(a, 0, aSize-1);   // calls the merge sort function and does its magic
+    printarray(a, aSize);   // prints the array to console
+    std::cout << "\n\n" << std::endl;   // just to tidy up output
+    
     return 0;
 }
